@@ -20,22 +20,23 @@ public class TaskController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Task>> findAll(){
+    public ResponseEntity<List<Task>> findAll() {
         return ResponseEntity.ok(taskService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Task> findById(@PathVariable Long id){
+    public ResponseEntity<Task> findById(@PathVariable Long id) {
         return ResponseEntity.ok(taskService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Task> save(@RequestBody Task task){
+    public ResponseEntity<Task> save(@RequestBody Task task) {
         return ResponseEntity.status(HttpStatus.CREATED).body(taskService.save(task));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        taskService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
