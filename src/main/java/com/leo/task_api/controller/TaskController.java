@@ -2,6 +2,8 @@ package com.leo.task_api.controller;
 
 import com.leo.task_api.Service.TaskService;
 import com.leo.task_api.model.Task;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tasks")
+@Tag(name = "Tags")
 public class TaskController {
 
     private final TaskService taskService;
@@ -28,7 +31,7 @@ public class TaskController {
     public ResponseEntity<Task> findById(@PathVariable Long id) {
         return ResponseEntity.ok(taskService.findById(id));
     }
-
+    @Operation(summary = "Metodo POSt para inserir", description = "use-o para salvar uma nova tarefa")
     @PostMapping
     public ResponseEntity<Task> save(@RequestBody Task task) {
         return ResponseEntity.status(HttpStatus.CREATED).body(taskService.save(task));
